@@ -1,0 +1,12 @@
+
+config defaults
+	option forward 'ACCEPT'
+	option disable_ipv6 '0'
+
+config zone
+	option input 'ACCEPT'
+	option output 'ACCEPT'
+	option forward 'ACCEPT'
+	option name 'wan'
+	option mtu_fix '1'
+

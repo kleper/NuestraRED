@@ -1,0 +1,7 @@
+
+config bmx6 'luci'
+	option ignore '0'
+	option position '3'
+	option json 'exec:/www/cgi-bin/bmx6-info -s'
+	option place 'qmp Mesh'
+

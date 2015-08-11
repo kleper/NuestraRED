@@ -1,0 +1,5 @@
+
+config b6m-spread 'general'
+	option method 'http'
+	option interval '60'
+

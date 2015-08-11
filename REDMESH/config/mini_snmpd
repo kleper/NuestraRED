@@ -1,0 +1,11 @@
+
+config mini_snmpd
+	option ipv6 '0'
+	option community 'public'
+	list disks '/jffs'
+	list disks '/tmp'
+	list interfaces 'loopback'
+	list interfaces 'lan'
+	list interfaces 'wan'
+	option enabled '1'
+

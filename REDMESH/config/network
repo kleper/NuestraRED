@@ -1,0 +1,44 @@
+
+config interface 'loopback'
+	option ifname 'lo'
+	option proto 'static'
+	option ipaddr '127.0.0.1'
+	option netmask '255.0.0.0'
+
+config globals 'globals'
+	option ula_prefix 'fd34:33fe:df13::/48'
+
+config interface 'mesh'
+	option proto 'dhcp'
+
+config interface 'lan'
+	option type 'bridge'
+	option auto '1'
+	option proto 'static'
+	option ipaddr '10.40.2.1'
+	option netmask '255.255.255.0'
+	option dns '208.67.222.222 208.67.220.220 209.244.0.3'
+	list ifname 'eth0'
+	option ip6addr 'fd00:1714:1714:8a79::1/64'
+
+config interface 'lan_12'
+	option ifname '@lan.12'
+	option proto 'static'
+	option ip6addr 'FD02:0:0:24A4:3CFD:8A79:0:112/128'
+
+config interface 'lan_rescue'
+	option proto 'static'
+	option ipaddr '169.254.121.1'
+	option netmask '255.255.255.248'
+	option ifname 'br-lan'
+
+config interface 'mesh_w0_12'
+	option ifname '@mesh_w0.12'
+	option proto 'static'
+	option ip6addr 'FD02:0:0:24A4:3CFD:8A79:0:212/128'
+
+config interface 'mesh_w0'
+	option proto 'static'
+	option ipaddr '169.254.121.1'
+	option netmask '255.255.255.248'
+

@@ -1,0 +1,68 @@
+
+config bmx6 'general'
+	option tun4Address '10.40.2.1/24'
+	option tun6Address '2012:0:0:8a79:0:0:0:1/64'
+
+config plugin 'bmx6_config_plugin'
+	option plugin 'bmx6_config.so'
+
+config plugin 'bmx6_json_plugin'
+	option plugin 'bmx6_json.so'
+
+config plugin 'bmx6_sms_plugin'
+	option plugin 'bmx6_sms.so'
+
+config syncSms
+	option syncSms 'chat'
+
+config ipVersion 'ipVersion'
+	option ipVersion '6'
+
+config dev 'mesh_1'
+	option dev 'br-lan.12'
+
+config tunDev 'tmain'
+	option tunDev 'tmain'
+	option tun4Address '10.40.2.1/24'
+	option tun6Address '2012:0:0:8a79:0:0:0:1/64'
+
+config dev 'mesh_2'
+	option dev 'wlan0.12'
+
+config tunOut 'qmp_cloud'
+	option tunOut 'cloud'
+	option network '10.0.0.0/8'
+	option minPrefixLen '24'
+
+config tunOut 'qmp_inet6'
+	option tunOut 'inet6'
+	option network '::/0'
+	option maxPrefixLen '0'
+	option tableRule '32767/253'
+
+config tunOut 'qmp_cloud6'
+	option tunOut 'cloud6'
+	option network '::/0'
+	option minPrefixLen '48'
+
+config tunOut 'qmp_inet4'
+	option tunOut 'inet4'
+	option network '0.0.0.0/0'
+	option maxPrefixLen '0'
+	option tableRule '32767/253'
+
+config tunOut 'qmp_community'
+	option tunOut 'community'
+	option network '10.0.0.0/8'
+	option maxPrefixLen '8'
+
+config tunOut 'qmp_community6'
+	option tunOut 'community6'
+	option network '::/0'
+	option minPrefixLen '32'
+	option maxPrefixLen '48'
+
+config tunIn 'qmp_community_offer'
+	option tunIn 'qmp_community_offer'
+	option network '10.0.0.0/8'
+

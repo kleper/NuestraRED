@@ -1,0 +1,38 @@
+
+config libremap
+	list api_url 'http://libremap.net/api/'
+	list api_url 'http://libremap.berlin.freifunk.net/api'
+	option fetch_by_name '0'
+	option community 'qMp.cat'
+	option id '3d05b9e454d0e2eb24e72eed0c31e9a3'
+	option rev '3483-91644e88f60963dab36129cff6e0b3bf'
+
+config plugin 'altermap'
+	option enabled '0'
+
+config plugin 'contact'
+	option enabled '0'
+	option name 'FIXME'
+	option email 'FIX@ME'
+
+config plugin 'freifunk'
+	option enabled '0'
+
+config plugin 'location'
+	option enabled '1'
+	option latitude '-75.68945'
+	option longitude '4.72359'
+	option elev '1660'
+
+config plugin 'olsr'
+	option enabled '0'
+
+config plugin 'system'
+	option enabled '1'
+
+config plugin 'wireless'
+	option enabled '1'
+
+config plugin 'babel'
+	option enabled '0'
+
