@@ -1,0 +1,14 @@
+#!/bin/bash
+#
+# /etc/rc.local: Local multi-user startup script.
+#
+cd /home/wikipedia/data
+kiwix-serve --port=85 --daemon --library library.xml &
+novnc &
+sudo -u nosred vncserver
+#x11vnc -nap -wait 50 -noxdamage -passwd camPUS -display :0 -forever -o /var/log/x11vnc.log -bg
+ifconfig eth0 10.40.2.254 netmask 255.255.255.0 up
+route add default gw 10.40.2.1
+
+mysql.server start
+
