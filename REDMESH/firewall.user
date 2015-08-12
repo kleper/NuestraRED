@@ -17,6 +17,8 @@ iptables -A INPUT -p tcp -s 10.0.0.0/8 --dport 22 -m state --state NEW,ESTABLISH
 #Navegacion WEB
 iptables -A INPUT -p tcp --dport 80 -m state --state NEW,ESTABLISHED -j ACCEPT
 iptables -A INPUT -p tcp --dport 443 -m state --state NEW,ESTABLISHED -j ACCEPT
+#RadioSUCIA
+iptables -A INPUT -p tcp --dport 8000 -m state --state NEW,ESTABLISHED -j ACCEPT
 #PROXY
 iptables -t nat -A PREROUTING -i br-lan -p tcp --dport 80 -j DNAT --to 10.40.2.254:8888
 iptables -t nat -A PREROUTING -i br-lan -p tcp --dport 443 -j DNAT --to 10.40.2.254:8888
