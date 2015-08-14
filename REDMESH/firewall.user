@@ -42,3 +42,6 @@ iptables -A INPUT -p tcp --dport 80 -m limit --limit 25/minute --limit-burst 100
 iptables -A INPUT -p tcp --dport 443 -m limit --limit 25/minute --limit-burst 100 -j ACCEPT
 iptables -A INPUT -p tcp --dport 8888 -m limit --limit 25/minute --limit-burst 100 -j ACCEPT
 iptables -A INPUT -p tcp --dport 3129 -m limit --limit 25/minute --limit-burst 100 -j ACCEPT
+#Acepa PING para pruebas
+iptables -A OUTPUT -p icmp --icmp-type echo-request -j ACCEPT
+iptables -A INPUT -p icmp --icmp-type echo-reply -j ACCEPT
