@@ -1,4 +1,5 @@
 # REGLAS INICIALES TODO CERRADO
+iptables -A INPUT -i lo -j ACCEPT
 iptables -P INPUT DROP
 iptables -P OUTPUT ACCEPT
 iptables -P FORWARD DROP
@@ -9,9 +10,9 @@ iptables -t nat -A POSTROUTING -s 172.16.0.0/12 ! -d 172.16.0.0/12 -j MASQUERADE
 iptables -t nat -A POSTROUTING -s 192.168.0.0/16 ! -d 192.168.0.0/16 -j MASQUERADE
 iptables -A FORWARD -p tcp -o eth1 -m tcp --tcp-flags SYN,RST SYN -j TCPMSS --clamp-mss-to-pmtu
 iptables -t nat -A POSTROUTING -o eth1 ! -d 10.0.0.0/8 -j MASQUERADE
-#DNS
-ACCEPT tcp -- 0.0.0.0/0 0.0.0.0/0 tcp dpt:53
-ACCEPT udp -- 0.0.0.0/0 0.0.0.0/0 udp dpt:53
+# Abrimos el puerto del servidor DNS
+iptables -A INPUT -i eth0 -s 0/0 -p tcp --dport 53 -j ACCEPT
+iptables -A INPUT -i eth0 -s 0/0 -p udp --dport 53 -j ACCEPT
 #SSH
 iptables -A INPUT -p tcp -s 10.0.0.0/8 --dport 22 -m state --state NEW,ESTABLISHED -j ACCEPT
 #Navegacion WEB
