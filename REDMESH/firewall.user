@@ -11,8 +11,8 @@ iptables -t nat -A POSTROUTING -s 192.168.0.0/16 ! -d 192.168.0.0/16 -j MASQUERA
 iptables -A FORWARD -p tcp -o eth1 -m tcp --tcp-flags SYN,RST SYN -j TCPMSS --clamp-mss-to-pmtu
 iptables -t nat -A POSTROUTING -o eth1 ! -d 10.0.0.0/8 -j MASQUERADE
 # Abrimos el puerto del servidor DNS
-iptables -A INPUT -i eth0 -s 0/0 -p tcp --dport 53 -j ACCEPT
-iptables -A INPUT -i eth0 -s 0/0 -p udp --dport 53 -j ACCEPT
+iptables -A INPUT -i br-lan -s 0/0 -p tcp --dport 53 -j ACCEPT
+iptables -A INPUT -i br-lan -s 0/0 -p udp --dport 53 -j ACCEPT
 #Saltarse la politica por defecto
 # Exceptions to default policy
 iptables -A INPUT -p tcp --dport 80 -j ACCEPT       
