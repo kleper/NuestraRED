@@ -35,8 +35,8 @@ iptables -A INPUT   -p tcp --sport 8888 -m state --state NEW,ESTABLISHED -j ACCE
 iptables -A OUTPUT  -p tcp --dport 3129 -j ACCEPT
 iptables -A INPUT   -p tcp --sport 3129 -m state --state NEW,ESTABLISHED -j ACCEPT
 #PROXY
-iptables -t nat -A PREROUTING -i br-lan -p tcp --dport 80 -j DNAT --to 10.40.2.254:8888
-iptables -t nat -A PREROUTING -i br-lan -p tcp --dport 443 -j DNAT --to 10.40.2.254:8888
+#iptables -t nat -A PREROUTING -i br-lan -p tcp --dport 80 -j DNAT --to 10.40.2.254:8888
+#iptables -t nat -A PREROUTING -i br-lan -p tcp --dport 443 -j DNAT --to 10.40.2.254:8888
 #Limitador de Trafico
 iptables -A INPUT -p tcp --dport 80 -m limit --limit 25/minute --limit-burst 100 -j ACCEPT
 iptables -A INPUT -p tcp --dport 443 -m limit --limit 25/minute --limit-burst 100 -j ACCEPT
