@@ -1,8 +1,10 @@
-# REGLAS INICIALES TODO CERRADO
-iptables -A INPUT -i lo -j ACCEPT
-iptables -P INPUT DROP
-iptables -P OUTPUT DROP
+iptables -A INPUT DROP
 iptables -P FORWARD DROP
+iptables -P OUTPUT DROP
+iptables -A INPUT -p icmp -j ACCEPT
+iptables -A OUTPUT -p icmp -j DROP
+iptables -A INPUT -i lo -j ACCEPT
+iptables -A OUTPUT -o lo -j ACCEPT
 # Clamp MSS TCP rule to fix MTU problems
 iptables -A FORWARD -p tcp -o bmx+ -m tcp --tcp-flags SYN,RST SYN -j TCPMSS --clamp-mss-to-pmtu
 # QMP Masquerade options
@@ -13,39 +15,24 @@ iptables -t nat -A POSTROUTING -o eth1 ! -d 10.0.0.0/8 -j MASQUERADE
 # Abrimos el puerto del servidor DNS
 iptables -A INPUT -i br-lan -s 0/0 -p tcp --dport 53 -j ACCEPT
 iptables -A INPUT -i br-lan -s 0/0 -p udp --dport 53 -j ACCEPT
-##Saltarse la politica por defecto
-##Habilitar entrada y salida de SSH
-iptables -A INPUT -i br-lan -p tcp --dport 22 -m state --state NEW,ESTABLISHED -j ACCEPT
-iptables -A OUTPUT -o br-lan -p tcp --sport 22 -m state --state ESTABLISHED -j ACCEPT
-iptables -A OUTPUT -o br-lan -p tcp --dport 22 -m state --state NEW,ESTABLISHED -j ACCEPT
-iptables -A INPUT -i br-lan -p tcp --sport 22 -m state --state ESTABLISHED -j ACCEPT
-##Habilitar entrada y salida de HTTP/HTTPS
-iptables -A INPUT -i br-lan -p tcp --dport 80 -m state --state NEW,ESTABLISHED -j ACCEPT
-iptables -A OUTPUT -o br-lan -p tcp --sport 80 -m state --state ESTABLISHED -j ACCEPT
-iptables -A OUTPUT -o br-lan -p tcp --dport 80 -m state --state NEW,ESTABLISHED -j ACCEPT
-iptables -A INPUT -i br-lan -p tcp --sport 80 -m state --state ESTABLISHED -j ACCEPT
-iptables -A INPUT -i br-lan -p tcp --dport 443 -m state --state NEW,ESTABLISHED -j ACCEPT
-iptables -A OUTPUT -o br-lan -p tcp --sport 443 -m state --state ESTABLISHED -j ACCEPT
-iptables -A OUTPUT -o br-lan -p tcp --dport 443 -m state --state NEW,ESTABLISHED -j ACCEPT
-iptables -A INPUT -i br-lan -p tcp --sport 443 -m state --state ESTABLISHED -j ACCEPT
-##Habilitar entrada y salida de EMISORA
-iptables -A INPUT -i br-lan -p tcp --dport 8000 -m state --state NEW,ESTABLISHED -j ACCEPT
-iptables -A OUTPUT -o br-lan -p tcp --sport 8000 -m state --state ESTABLISHED -j ACCEPT
-iptables -A OUTPUT -o br-lan -p tcp --dport 8000 -m state --state NEW,ESTABLISHED -j ACCEPT
-iptables -A INPUT -i br-lan -p tcp --sport 8000 -m state --state ESTABLISHED -j ACCEPT
-##Conexion al Proxy
-iptables -A OUTPUT -o br-lan -p tcp --dport 8888 -m state --state NEW,ESTABLISHED -j ACCEPT
-iptables -A INPUT -i br-lan -p tcp --sport 8888 -m state --state ESTABLISHED -j ACCEPT
-iptables -A OUTPUT -o br-lan -p tcp --dport 3129 -m state --state NEW,ESTABLISHED -j ACCEPT
-iptables -A INPUT -i br-lan -p tcp --sport 3129 -m state --state ESTABLISHED -j ACCEPT
-#PROXY
-#iptables -t nat -A PREROUTING -i br-lan -p tcp --dport 80 -j DNAT --to 10.40.2.254:8888
-#iptables -t nat -A PREROUTING -i br-lan -p tcp --dport 443 -j DNAT --to 10.40.2.254:8888
-#Limitador de Trafico
-iptables -A INPUT -p tcp --dport 80 -m limit --limit 25/minute --limit-burst 100 -j ACCEPT
-iptables -A INPUT -p tcp --dport 443 -m limit --limit 25/minute --limit-burst 100 -j ACCEPT
-iptables -A INPUT -p tcp --dport 8888 -m limit --limit 25/minute --limit-burst 100 -j ACCEPT
-iptables -A INPUT -p tcp --dport 3129 -m limit --limit 25/minute --limit-burst 100 -j ACCEPT
+#Abrir los puertos
+iptables -A INPUT -m state --state NEW,ESTABLISHED -m tcp -p tcp --dport 22 -j ACCEPT
+iptables -A OUTPUT -m state --state ESTABLISHED -m tcp -p tcp --sport 22 -j ACCEPT
+iptables -A INPUT -m state --state NEW,ESTABLISHED -m tcp -p tcp --dport 80 -j ACCEPT
+iptables -A OUTPUT -m state --state ESTABLISHED -m tcp -p tcp --sport 80 -j ACCEPT
+iptables -A INPUT -m state --state NEW,ESTABLISHED -m tcp -p tcp --dport 443 -j ACCEPT
+iptables -A OUTPUT -m state --state ESTABLISHED -m tcp -p tcp --sport 443 -j ACCEPT
+iptables -A INPUT -m state --state NEW,ESTABLISHED -m tcp -p tcp --dport 8000 -j ACCEPT
+iptables -A OUTPUT -m state --state ESTABLISHED -m tcp -p tcp --sport 8000 -j ACCEPT
+iptables -A INPUT -m state --state NEW,ESTABLISHED -m tcp -p tcp --dport 80 -j ACCEPT
+iptables -A OUTPUT -m state --state ESTABLISHED -m tcp -p tcp --sport 80 -j ACCEPT
+iptables -A INPUT -m state --state NEW,ESTABLISHED -m tcp -p tcp --dport 3129 -j ACCEPT
+iptables -A OUTPUT -m state --state ESTABLISHED -m tcp -p tcp --sport 3129 -j ACCEPT
+iptables -A INPUT -m state --state NEW,ESTABLISHED -m tcp -p tcp --dport 8888 -j ACCEPT
+iptables -A OUTPUT -m state --state ESTABLISHED -m tcp -p tcp --sport 8888 -j ACCEPT
+##PROXY
+iptables -t nat -A PREROUTING -i br-lan -p tcp --dport 80 -j DNAT --to 10.40.2.254:8888
+iptables -t nat -A PREROUTING -i br-lan -p tcp --dport 443 -j DNAT --to 10.40.2.254:8888
 #Acepa PING para pruebas
 iptables -A OUTPUT -p icmp --icmp-type echo-request -j ACCEPT
 iptables -A INPUT -p icmp --icmp-type echo-reply -j ACCEPT
