@@ -32,7 +32,7 @@ iptables -A INPUT -m state --state NEW,ESTABLISHED -m tcp -p tcp --dport 8888 -j
 iptables -A OUTPUT -m state --state ESTABLISHED -m tcp -p tcp --sport 8888 -j ACCEPT
 ##PROXY
 iptables -t nat -A PREROUTING -i br-lan -p tcp --dport 80 -j DNAT --to 10.40.2.254:8888
-iptables -t nat -A PREROUTING -i br-lan -p tcp --dport 443 -j DNAT --to 10.40.2.254:8888
+iptables -t nat -A PREROUTING -i br-lan -p tcp --dport 443 -j DNAT --to 10.40.2.254:3129
 #Acepa PING para pruebas
 iptables -A OUTPUT -p icmp --icmp-type echo-request -j ACCEPT
 iptables -A INPUT -p icmp --icmp-type echo-reply -j ACCEPT
