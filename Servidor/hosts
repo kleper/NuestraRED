@@ -1,0 +1,48 @@
+127.0.0.1	localhost
+127.0.1.1	nosredserver.nuestrared.org nosredserver
+
+# The following lines are desirable for IPv6 capable hosts
+::1     localhost ip6-localhost ip6-loopback
+ff02::1 ip6-allnodes
+ff02::2 ip6-allrouters
+
+###DNS POR DEFECTO
+10.40.2.254 proxy.nuestrared.org
+10.40.2.254 wikipedia.nuestrared.org
+10.40.2.254 infolocal.nuestrared.org
+10.40.2.254 nuestrared nuestrared.org www.nuestrared.org
+10.40.2.254 media.nuestrared.org
+
+46.4.214.14 vivirenlafinca.org www.vivirenlafinca.org
+46.4.214.14 tupale.co www.tupale.co
+46.4.214.14 buscandodragones.com www.buscandodragones.com
+162.243.246.186 radiosucia.nuestrared.org
+166.62.72.129 iesfaarabia.edu.co
+
+####POISON DNS
+
+10.40.2.254 .double-click.net
+10.40.2.254 .google.com
+10.40.2.254 .whatsapp.com
+10.40.2.254 .whatsapp.net
+10.40.2.254 .facebook.com
+10.40.2.254 .twitter.com
+10.40.2.254 .t.co
+10.40.2.254 .youtube.com
+10.40.2.254 .gmail.com
+10.40.2.254 .yahoo.com
+10.40.2.254 .dropbox.com
+10.40.2.254 .github.com
+10.40.2.254 .pornhub.com
+10.40.2.254 .youporn.com
+10.40.2.254 .denunciando.com
+10.40.2.254 .ok.ru
+10.40.2.254 .google.co
+10.40.2.254 .go.com
+10.40.2.254 .alibaba.com
+10.40.2.254 .amazon.com
+10.40.2.254 .duba.net
+10.40.2.254 .ksmobile.com
+10.40.2.254 .umengcloud.com
+10.40.2.254 .ijinshan.com
+

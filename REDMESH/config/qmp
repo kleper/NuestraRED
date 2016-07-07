@@ -37,7 +37,7 @@ config qmp 'roaming'
 	option ignore '1'
 
 config qmp 'networks'
-	option dns '208.67.222.222 208.67.220.220 209.244.0.3'
+	option dns '10.40.2.254'
 	option disable_lan_dhcp '0'
 	option disable_mesh_dhcp '1'
 	option rescue_prefix24 '169.254'
@@ -58,10 +58,10 @@ config qmp 'wireless'
 	option mrate '6000'
 
 config wireless
-	option mac '24:a4:3c:fc:8a:79'
+	option mac '24:a4:3c:ac:8e:e2'
 	option device 'wlan0'
+	option mode 'adhoc_ap'
 	option name 'NuestraRED'
 	option channel '6+'
-	option mode 'adhoc'
-	option txpower '16'
-
+	option txpower '30'
+	option essidap 'NuestraRED.org'
