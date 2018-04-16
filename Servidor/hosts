@@ -12,11 +12,7 @@ ff02::2 ip6-allrouters
 10.40.2.254 infolocal.nuestrared.org
 10.40.2.254 nuestrared nuestrared.org www.nuestrared.org
 10.40.2.254 media.nuestrared.org
-
-46.4.214.14 vivirenlafinca.org www.vivirenlafinca.org
-46.4.214.14 tupale.co www.tupale.co
-46.4.214.14 buscandodragones.com www.buscandodragones.com
-162.243.246.186 radiosucia.nuestrared.org
+10.40.2.254 mapas.nuestrared.org
 166.62.72.129 iesfaarabia.edu.co
 
 ####POISON DNS
@@ -45,4 +41,18 @@ ff02::2 ip6-allrouters
 10.40.2.254 .ksmobile.com
 10.40.2.254 .umengcloud.com
 10.40.2.254 .ijinshan.com
+10.40.2.254 www.google.com
+10.40.2.254 captive.apple.com
+10.40.2.254 clients3.google.com 
+10.40.2.254 alt2-mtalk.google.com 
+10.40.2.254 googleapis.l.google.com 
+10.40.2.254 www.googleapis.com 
+10.40.2.254 ms.cmcm.com
+10.40.2.254 android.googleapis.com
+10.40.2.254 captive.apple.com
+10.40.2.254 apple.com
+10.40.2.254 connectivitycheck.gstatic.com
+10.40.2.254 clients.l.google.com
+10.40.2.254 connectivitycheck.android.com
+10.40.2.254 play.googleapis.com
 
