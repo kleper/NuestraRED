@@ -1,0 +1,51 @@
+#Este archivo de configuración hace que los celulares que se conecten a la red encuentren el portal captivo y crean que estan conectados a Internet
+server {
+	listen 80;
+	server_name
+        clients3.google.com
+        clients.l.google.com
+        connectivitycheck.android.com
+        connectivitycheck.gstatic.com
+        play.googleapis.com
+        ;
+	root /var/www/captive;
+
+	index index.html index.htm index.nginx-debian.html;
+
+	location /generate_204 {
+        return 204;
+	return 302 http://infolocal.nuestrared.org;
+    	}
+	
+	location / {
+		try_files $uri $uri/ =404;
+	}
+
+	# pass PHP scripts to FastCGI server
+	#
+	location ~ \.php$ {
+		include snippets/fastcgi-php.conf;
+	
+		fastcgi_pass 127.0.0.1:9000;
+	}
+
+ 	location ~ /\.ht {
+		deny all;
+	}
+}
+
+
+server {
+    server_name
+        apple.com
+        captive.apple.com;
+    listen 80;
+
+    root /var/www/captive;
+
+    location / {
+            try_files /index.html /index.html;
+    }
+
+}
+
